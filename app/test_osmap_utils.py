@@ -36,18 +36,18 @@ def test_query_check_some_names_json():
         assert some in all_names
 
 
-def test_query_check_some_points_json():
-    city = "Москва"
-    street = "Пятницкая улица"
+# def test_query_check_some_points_json():
+#     city = "Москва"
+#     street = "Пятницкая улица"
 
-    some_points = [(56.1861292, 36.9573638),
-                   (55.872695, 37.3175797),
-                   (55.7324561, 37.6271598)]
+#     some_points = [(56.1861292, 36.9573638),
+#                    (55.872695, 37.3175797),
+#                    (55.7324561, 37.6271598)]
 
-    searcher = osmap_utils.StreetSearcher(city=city)
-    result = searcher.query_cords(street)
+#     searcher = osmap_utils.StreetSearcher(city=city)
+#     result = searcher.query_cords(street)
 
-    all_points = [point.get_cord() for point in result]
+#     all_points = [point.get_cord() for point in result]
 
-    for some in some_points:
-        assert some in all_points
+#     for some in some_points:
+#         assert some in all_points
