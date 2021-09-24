@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  flask_app:
+    restart: always
+    build: .
+    ports:
+      - "8000:8000"
+    command: ./flask_entrypoint.sh
