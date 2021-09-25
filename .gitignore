@@ -133,3 +133,5 @@ cache/
 *.db
 
 docker_db/
+
+data_prepare/dara/
