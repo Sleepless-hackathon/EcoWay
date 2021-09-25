@@ -6,4 +6,23 @@ services:
     build: .
     ports:
       - "8000:8000"
-    command: ./flask_entrypoint.sh
+    depends_on:
+      - db
+    command: ./docker_entrypoint.sh
+
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - ./docker_db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql_root_pass
+      MYSQL_DATABASE: flask_db
+      MYSQL_USER: flask
+      MYSQL_PASSWORD: mysql_flask_pass
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
