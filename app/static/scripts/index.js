@@ -5,6 +5,14 @@ var options =
   id: "js-AddressField"
 };
 
+//Запускаем модуль подсказок
+AhunterSuggest.Address.Solid( options );
+
+var options = 
+{ 
+  //Наше поле, куда пользователи будут вводить почтовые адреса
+  id: "js-AddressField2"
+};
 
 //Запускаем модуль подсказок
 AhunterSuggest.Address.Solid( options );
