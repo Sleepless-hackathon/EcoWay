@@ -14,7 +14,7 @@ services:
     image: mariadb
     restart: always
     volumes:
-      - ./docker_db:/var/lib/mysql
+      - docker_db:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: mysql_root_pass
       MYSQL_DATABASE: flask_db
@@ -26,3 +26,7 @@ services:
     restart: always
     ports:
       - 8080:8080
+
+volumes:
+  docker_db:
+    driver: local
