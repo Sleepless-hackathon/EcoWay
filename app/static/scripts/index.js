@@ -170,17 +170,49 @@ function RoutePath(point1, point2)
     });
 }
 
+function fromNameToCoord(id) {
+    var geocoder = new google.maps.Geocoder();
+    var address = jQuery(`#${id}`).val();
+
+    geocoder.geocode( { 'address': address}, function(results, status) {
+
+    if (status == google.maps.GeocoderStatus.OK) {
+        var latitude = results[0].geometry.location.lat();
+        var longitude = results[0].geometry.location.lng();
+        jQuery('#coordinates').val(latitude+', '+longitude);
+    } 
+    }); 
+}
+
 // Функция для подгрузки данных о маршрутах
 function loadWay() {
     bottomClasses.add("hidden");
     fromClasses.add("hidden");
     toClasses.add("hidden");
     blurClasses.remove("hidden");
-    var valArr1 = document.getElementById("js-AddressField").value.split(", ");
-    var valArr2 = document.getElementById("js-AddressField2").value.split(", ");
-    var point1 = {"lat" : Number(valArr1[0]), "lng": Number(valArr1[1])};
-    var point2 = {"lat" : Number(valArr2[0]), "lng": Number(valArr2[1])};
-    RoutePath(point1, point2)
+    try {
+        var valArr1 = document.getElementById("js-AddressField").value.split(", ");
+        var valArr2 = document.getElementById("js-AddressField2").value.split(", ");
+        var point1 = {"lat" : Number(valArr1[0]), "lng": Number(valArr1[1])};
+        var point2 = {"lat" : Number(valArr2[0]), "lng": Number(valArr2[1])};
+        RoutePath(point1, point2)
+    } catch {
+
+    }
+
+    try {
+        var valArr1 = document.getElementById("js-AddressField").value;
+        var valArr2 = document.getElementById("js-AddressField2").value;
+        var point1 = fromNameToCoord("js-AddressField");
+        var point2 = fromNameToCoord("js-AddressField2");
+        var valArr1 = point1.split(", ");
+        var valArr2 = point2.split(", ");
+        var point1 = {"lat" : Number(valArr1[0]), "lng": Number(valArr1[1])};
+        var point2 = {"lat" : Number(valArr2[0]), "lng": Number(valArr2[1])};
+        RoutePath(point1, point2)
+    } catch {
+
+    }
 
     setTimeout(function () {
         blurClasses.add("hidden");
