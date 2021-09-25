@@ -61,7 +61,6 @@ var choice_drive = document.getElementsByClassName("choice_drive")[0]
 var choiceClasses = choice_drive.classList
 
 function setPoints() {
-
     setTimeout(function () {
 
         bottomClasses.remove("hidden");
@@ -70,6 +69,8 @@ function setPoints() {
         menuClasses.add("hidden");
         burgerClasses.remove("hidden");
         closeClasses.add("hidden");
+        document.getElementsByClassName("from_input")[0].value = "" 
+        document.getElementsByClassName("to_input")[0].value = "" 
 
         map.on('click', function(e) {        
             var popLocation= e.latlng;
@@ -79,8 +80,7 @@ function setPoints() {
                 document.getElementsByClassName("to_input")[0].value = popLocation["lat"] + ", " + popLocation["lng"] 
             }
         });    
-    }, 100);
-    
+    }, 1000);
 }
 
 map.touchZoom.disable();
