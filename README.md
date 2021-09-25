@@ -15,11 +15,13 @@
 <h4>Основной стек технологий:</h4>
 <ul>
 	<li>HTML, CSS, JavaScript.</li>
+	<li>Figma.</li>
 	<li>Flask.</li>
 	<li>Gunicorn</li>
     <li>MariaDB.</li>
     <li>jQuery</li>
 	<li>Travis CI.</li>
+	<li>Leaflet.</li>
 	<li>Docker,  Docker Compose.</li>
 	<li>Git.</li>
 
