@@ -171,17 +171,23 @@ function RoutePath(point1, point2)
 }
 
 function fromNameToCoord(id) {
-    var geocoder = new google.maps.Geocoder();
-    var address = jQuery(`#${id}`).val();
+    var url = "/get_cords";
 
-    geocoder.geocode( { 'address': address}, function(results, status) {
-
-    if (status == google.maps.GeocoderStatus.OK) {
-        var latitude = results[0].geometry.location.lat();
-        var longitude = results[0].geometry.location.lng();
-        jQuery('#coordinates').val(latitude+', '+longitude);
-    } 
-    }); 
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url);
+    
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    
+    xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4) {
+          console.log(xhr.status);
+          console.log(xhr.responseText);
+       }};
+    
+    var data = `${document.getElementById(id).value}`;
+    
+    xhr.send(data);
 }
 
 // Функция для подгрузки данных о маршрутах
