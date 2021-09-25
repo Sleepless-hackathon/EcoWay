@@ -64,7 +64,7 @@ function changeVisibilityMenu() {
         closeClasses.remove("hidden");
 
     } else {
-        menuClasses.add("hidden");
+        menuClasses.add("hRoutePathidden");
         burgerClasses.remove("hidden");
         closeClasses.add("hidden");
     }
@@ -176,9 +176,11 @@ function loadWay() {
     fromClasses.add("hidden");
     toClasses.add("hidden");
     blurClasses.remove("hidden");
-    var val1 = document.getElementById("js-AddressField").value;
-    var val2 = document.getElementById("js-AddressField2").value;
-    RoutePath(val1, val2)
+    var valArr1 = document.getElementById("js-AddressField").value.split();
+    var valArr2 = document.getElementById("js-AddressField2").value.split();
+    var point1 = {"lat" : Number(valArr1[0]), "lng": Number(valArr1[1])};
+    var point2 = {"lat" : Number(valArr2[0]), "lng": Number(valArr2[1])};
+    RoutePath(point1, point2)
 
     setTimeout(function () {
         blurClasses.add("hidden");
