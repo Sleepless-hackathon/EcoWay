@@ -176,10 +176,20 @@ function loadWay() {
     fromClasses.add("hidden");
     toClasses.add("hidden");
     blurClasses.remove("hidden");
-    var valArr1 = document.getElementById("js-AddressField").value.split();
-    var valArr2 = document.getElementById("js-AddressField2").value.split();
-    var point1 = {"lat" : Number(valArr1[0]), "lng": Number(valArr1[1])};
-    var point2 = {"lat" : Number(valArr2[0]), "lng": Number(valArr2[1])};
+
+    var GPSlocation = document.getElementById("js-AddressField").value;
+    var LatLng = GPSlocation.split(", ")
+    var Lat = parseFloat(LatLng[0]);
+    var Lng = parseFloat(LatLng[1]);
+
+    var point1 = google.maps.LatLng(Lat, Lng)
+
+    var GPSlocation = document.getElementById("js-AddressField2").value;
+    var LatLng = GPSlocation.split(", ")
+    var Lat = parseFloat(LatLng[0]);
+    var Lng = parseFloat(LatLng[1]);
+
+    var point2 = google.maps.LatLng(Lat, Lng)
     RoutePath(point1, point2)
 
     setTimeout(function () {
