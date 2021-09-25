@@ -135,3 +135,4 @@ cache/
 docker_db/
 
 data_prepare/data/*
+data_prepare/data-csv/*
