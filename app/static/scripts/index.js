@@ -155,12 +155,30 @@ function sendFeedback() {
     xhr.send(data);
 }
 
+let control;
+function RoutePath(point1, point2)
+{
+    control = L.Routing.control({
+        waypoints: [
+            point1,
+            point2
+        ]
+      }).addTo(mymap);
+    control.on("routeselected", function(e) {
+        L.polyline(e.route.coordinates, { color: 'green'}).addTo(mymap);
+        mymap.removeControl(control);
+    });
+}
+
 // Функция для подгрузки данных о маршрутах
 function loadWay() {
     bottomClasses.add("hidden");
     fromClasses.add("hidden");
     toClasses.add("hidden");
     blurClasses.remove("hidden");
+    var val1 = document.getElementById("js-AddressField").value;
+    var val2 = document.getElementById("js-AddressField2").value;
+    RoutePath(val1, val2)
 
     setTimeout(function () {
         blurClasses.add("hidden");
