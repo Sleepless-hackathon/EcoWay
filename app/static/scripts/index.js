@@ -1,25 +1,17 @@
-//Готовим опции для модуля подсказок
-var options = 
-{ 
-  //Наше поле, куда пользователи будут вводить почтовые адреса
-  id: "js-AddressField"
-};
-
-//Запускаем модуль подсказок
+// Подсказки для ввода адреса
+var options = {id: "js-AddressField"};
+//Запускаем модуль подсказок для первого поля
 AhunterSuggest.Address.Solid( options );
 
-var options = 
-{ 
-  //Наше поле, куда пользователи будут вводить почтовые адреса
-  id: "js-AddressField2"
-};
-
-//Запускаем модуль подсказок
+var options = {id: "js-AddressField2"};
+//Запускаем модуль подсказок для второго поля
 AhunterSuggest.Address.Solid( options );
 
+// Генерация карты
 var map = new L.Map('mapid', {zoom: 9, center: new L.latLng([55.7504461, 37.6174943]) });
 map.addLayer(new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'));	//base layer
 
+// Добавление значка "лупы"
 map.addControl( new L.Control.Search({
     url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
     jsonpParam: 'json_callback',
@@ -31,8 +23,9 @@ map.addControl( new L.Control.Search({
     minLength: 2
 }) );
 
-map.touchZoom.disable();
+// 
 
+// Берём объекты по классу для дальнейшей обработки
 var burger = document.getElementsByClassName("burger")[0]
 var burgerClasses = burger.classList
 
@@ -42,6 +35,27 @@ var closeClasses = close.classList
 var menu = document.getElementsByClassName("menu")[0]
 var menuClasses = menu.classList
 
+var bottom = document.getElementsByClassName("bottom")[0]
+var bottomClasses = bottom.classList
+
+var from = document.getElementsByClassName("from")[0]
+var fromClasses = from.classList
+
+var to = document.getElementsByClassName("to")[0]
+var toClasses = to.classList
+
+var choice_drive = document.getElementsByClassName("choice_drive")[0]
+var choiceClasses = choice_drive.classList
+
+var blur = document.getElementsByClassName("blur")[0]
+var blurClasses = blur.classList
+
+var blur2 = document.getElementsByClassName("blur")[1]
+var blur2Classes = blur2.classList
+
+// 
+
+// Функция для изменения видимости меню
 function changeVisibilityMenu() {
     
     if (menuClasses.contains("hidden")) {
@@ -56,21 +70,10 @@ function changeVisibilityMenu() {
     }
 }
 
-var bottom = document.getElementsByClassName("bottom")[0]
-var bottomClasses = bottom.classList
-
-var from = document.getElementsByClassName("from")[0]
-var fromClasses = from.classList
-
-var to = document.getElementsByClassName("to")[0]
-var toClasses = to.classList
-
-var choice_drive = document.getElementsByClassName("choice_drive")[0]
-var choiceClasses = choice_drive.classList
-
+// Функция для установки адресов через координаты
 function setPoints() {
-    setTimeout(function () {
 
+    setTimeout(function () {
         bottomClasses.remove("hidden");
         fromClasses.remove("hidden");
         toClasses.remove("hidden");
@@ -91,8 +94,7 @@ function setPoints() {
     }, 1000);
 }
 
-map.touchZoom.disable();
-
+// Функция для установки адресов через адреса зданий
 function makePoints() {
     map.dragging.disable();
     map.touchZoom.disable();
@@ -112,18 +114,14 @@ function makePoints() {
     closeClasses.add("hidden");
 }
 
-var blur = document.getElementsByClassName("blur")[0]
-var blurClasses = blur.classList
-
-var blur2 = document.getElementsByClassName("blur")[1]
-var blur2Classes = blur2.classList
-
+// Переменная, накапливающая расстояния для каждого маршрута
+// общее расстояние и расстояние до начала зелёной тропы  
 var distance = {};
 var speedOnFoot = 100
 var speedBicycle = 300
 var speedScooter = 200
-var distanceGreen
 
+// Функция для открытия модального окна (окна для обратной связи)
 function openFeedback() {
     menuClasses.add("hidden");
     burgerClasses.remove("hidden");
@@ -132,6 +130,7 @@ function openFeedback() {
     blur2Classes.remove("hidden")
 }
 
+// Функция для отправки обратной связи
 function sendFeedback() {
     blur2Classes.add("hidden")
     var url = "https://reqbin.com/echo/post/json";
@@ -156,7 +155,7 @@ function sendFeedback() {
     xhr.send(data);
 }
 
-
+// Функция для подгрузки данных о маршрутах
 function loadWay() {
     bottomClasses.add("hidden");
     fromClasses.add("hidden");
@@ -217,6 +216,7 @@ function loadWay() {
     }, 2000);
 }
 
+// Если пользователь выбрал передвижение пешком
 function choiceOnFoot() {
     var foot = document.getElementsByClassName("foot")[0]
     var footClasses = foot.classList;
@@ -237,6 +237,7 @@ function choiceOnFoot() {
     scooterClasses.add("hidden")
 }
 
+// Если пользователь выбрал передвижение на велосипеде
 function choiceBicycle() {
     var foot = document.getElementsByClassName("foot")[0]
     var footClasses = foot.classList;
@@ -256,6 +257,7 @@ function choiceBicycle() {
     scooterClasses.add("hidden")
 }
 
+// Если пользователь выбрал передвижение на самокате
 function choiceScooter() {
     var foot = document.getElementsByClassName("foot")[0]
     var footClasses = foot.classList;
@@ -275,8 +277,10 @@ function choiceScooter() {
     scooterClasses.remove("hidden")
 }
 
+// Массив, хранящий все виды передвижения
 var drivers = ["foot", "bicycle", "scooter"]
 
+// Функция для выбора маршрута
 function choiceWay(choice) {
     var keys = Object.keys(distance)
 
