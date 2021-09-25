@@ -163,10 +163,10 @@ function RoutePath(point1, point2)
             point1,
             point2
         ]
-      }).addTo(mymap);
+      }).addTo(map);
     control.on("routeselected", function(e) {
-        L.polyline(e.route.coordinates, { color: 'green'}).addTo(mymap);
-        mymap.removeControl(control);
+        L.polyline(e.route.coordinates, { color: 'green'}).addTo(map);
+        map.removeControl(control);
     });
 }
 
