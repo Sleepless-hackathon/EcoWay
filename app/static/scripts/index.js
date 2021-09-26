@@ -162,9 +162,6 @@ function sendFeedback() {
 let control;
 function RoutePath(point1, point2)
 {
-    console.log(point1)
-    console.log(point2)
-
     control = L.Routing.control({
         waypoints: [
             point1,
@@ -217,24 +214,18 @@ function loadWay() {
     toClasses.add("hidden");
     blurClasses.remove("hidden");
 
-    try {
+    if (document.getElementById("js-AddressField").value[0] === "г") {
         var valArr1 = document.getElementById("js-AddressField").value;
         var valArr2 = document.getElementById("js-AddressField2").value;
         var point1 = fromNameToCoord("js-AddressField");
         var point2 = fromNameToCoord("js-AddressField2");
         RoutePath(point1, point2)
-    } catch {
-        console.log("a")
-    }
-
-    try {
+    } else {
         var valArr1 = document.getElementById("js-AddressField").value.split(", ");
         var valArr2 = document.getElementById("js-AddressField2").value.split(", ");
         var point1 = {"lat" : Number(valArr1[0]), "lng": Number(valArr1[1])};
         var point2 = {"lat" : Number(valArr2[0]), "lng": Number(valArr2[1])};
         RoutePath(point1, point2)
-    } catch {
-        console.log("b")
     }
 
     setTimeout(function () {
