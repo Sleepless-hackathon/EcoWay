@@ -158,6 +158,9 @@ function sendFeedback() {
 let control;
 function RoutePath(point1, point2)
 {
+    console.log(point1)
+    console.log(point2)
+
     control = L.Routing.control({
         waypoints: [
             point1,
@@ -197,6 +200,14 @@ function fromNameToCoord(id) {
 
 // Функция для подгрузки данных о маршрутах
 function loadWay() {
+    map.dragging.enable();
+    map.touchZoom.enable();
+    map.doubleClickZoom.enable();
+    map.scrollWheelZoom.enable();
+    map.boxZoom.enable();
+    map.keyboard.enable();
+
+
     bottomClasses.add("hidden");
     fromClasses.add("hidden");
     toClasses.add("hidden");
@@ -207,8 +218,6 @@ function loadWay() {
         var valArr2 = document.getElementById("js-AddressField2").value;
         var point1 = fromNameToCoord("js-AddressField");
         var point2 = fromNameToCoord("js-AddressField2");
-        console.log(point1)
-        console.log(point2)
         RoutePath(point1, point2)
     } catch {
         console.log("a")
