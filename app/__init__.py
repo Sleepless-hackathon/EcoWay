@@ -21,4 +21,7 @@ def create_app(config_class="app.config.Config"):
     from .index import index as index_blueprint
     app.register_blueprint(index_blueprint)
 
+    from .api import api as api_blueprint
+    app.register_blueprint(api_blueprint)
+
     return app
