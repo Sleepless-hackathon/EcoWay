@@ -133,13 +133,13 @@ function openFeedback() {
 // Функция для отправки обратной связи
 function sendFeedback() {
     blur2Classes.add("hidden")
-    var url = "https://reqbin.com/echo/post/json";
+    var url = "/api/push_data";
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url);
 
     xhr.setRequestHeader("Accept", "application/json");
-    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
     xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
@@ -171,7 +171,7 @@ function RoutePath(point1, point2)
 }
 
 function fromNameToCoord(id) {
-    var url = "/get_cords";
+    var url = "/api/get_cords";
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url);
