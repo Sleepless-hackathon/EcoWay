@@ -174,22 +174,25 @@ function fromNameToCoord(id) {
     var url = "/api/get_cords";
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", url);
+    xhr.open("POST", url, false);
     
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Content-Type", "application/json");
     
-    xhr.onreadystatechange = function () {
-       if (xhr.readyState === 4) {
-          console.log(xhr.status);
-          console.log(xhr.responseText);
-            return xhr.responseText
-       }};
+    // xhr.onreadystatechange = function () {
+    //    if (xhr.readyState === 4) {
+    //       console.log(xhr.status);
+    //       console.log(xhr.responseText);
+    //       return xhr.responseText
+    //     }};
     
     var data = `${document.getElementById(id).value}`;
     
     xhr.send(data);
 
+    if(xhr.status == 200) {
+        return xhr.responseText;
+    } 
 }
 
 // Функция для подгрузки данных о маршрутах
