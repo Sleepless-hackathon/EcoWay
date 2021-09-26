@@ -183,13 +183,13 @@ function fromNameToCoord(id) {
        if (xhr.readyState === 4) {
           console.log(xhr.status);
           console.log(xhr.responseText);
+            return xhr.responseText
        }};
     
     var data = `${document.getElementById(id).value}`;
     
     xhr.send(data);
 
-    return xhr.responseText
 }
 
 // Функция для подгрузки данных о маршрутах
