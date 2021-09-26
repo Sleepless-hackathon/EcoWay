@@ -213,6 +213,8 @@ function loadWay() {
         var valArr2 = document.getElementById("js-AddressField2").value;
         var point1 = fromNameToCoord("js-AddressField");
         var point2 = fromNameToCoord("js-AddressField2");
+        console.log(point1)
+        console.log(point2)
         RoutePath(point1, point2)
     } catch {
 
