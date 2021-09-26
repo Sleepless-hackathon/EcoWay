@@ -208,7 +208,7 @@ function loadWay() {
         console.log(point2)
         RoutePath(point1, point2)
     } catch {
-
+        console.log("a")
     }
 
     try {
@@ -218,7 +218,7 @@ function loadWay() {
         var point2 = {"lat" : Number(valArr2[0]), "lng": Number(valArr2[1])};
         RoutePath(point1, point2)
     } catch {
-
+        console.log("b")
     }
 
     setTimeout(function () {
