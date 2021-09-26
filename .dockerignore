@@ -4,7 +4,4 @@ cache/
 
 docker_db/
 
-data_prepare/data/*
-data_prepare/data-csv/*
-data_prepare/data-csv.zip
-data_prepare/dataset.pkl
+data_prepare/*
