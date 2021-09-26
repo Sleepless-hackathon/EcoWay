@@ -77,6 +77,7 @@ function setPoints() {
         bottomClasses.remove("hidden");
         fromClasses.remove("hidden");
         toClasses.remove("hidden");
+        choiceClasses.add("hidden")
         menuClasses.add("hidden");
         burgerClasses.remove("hidden");
         closeClasses.add("hidden");
