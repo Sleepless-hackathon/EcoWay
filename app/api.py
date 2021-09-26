@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template, request
 import json
-from . import osmap_utils
+from . import osmap_utils, db
+from .models import SensorData
 import keras
+from datetime import datetime, time
 
 api = Blueprint('api', __name__, url_prefix="/api")
 
@@ -40,3 +42,30 @@ def get_score():
         return "400 Bad Request", 400
 
     return json.dumps({"score": score})
+
+
+@api.route('/push_data', methods=['POST'])
+def push_sensor_data():
+    # TODO: обновление данный в модели для пересчета датчиков :)))
+
+    json_data = request.get_json()
+
+    timestamp = json_data.get(
+        "timestamp", datetime.now().timestamp())
+
+    if "aqi" not in json_data:
+        return "400 Bad Request", 400
+
+    AQI = json_data.get("aqi")
+
+    if "lat" not in json_data or "lng" not in json_data:
+        return "400 Bad Request", 400
+
+    lat, lng = json_data.get("lat"), json_data.get("lng")
+
+    record = SensorData(timestamp=timestamp, aqi=AQI, lat=lat, lng=lng)
+
+    db.session.add(record)
+    db.session.commit()
+
+    return "ok"
