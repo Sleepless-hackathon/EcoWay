@@ -22,17 +22,21 @@ class StreetSearcher:
         self.city = city
         self.query_format = f"{{query}}, {self.city}"
 
-    def query(self, street_name) -> NominatimResult:
+    def query(self, street_name, raw=False) -> NominatimResult:
         query_text = self.query_format.format(query=street_name)
+
+        if raw:
+            query_text = street_name
+
         result = self.nominatim.query(query_text)
         return result
 
-    def query_json(self, street_name) -> list:
-        json_data = self.query(street_name).toJSON()
+    def query_json(self, street_name, raw=False) -> list:
+        json_data = self.query(street_name, raw).toJSON()
         return json_data
 
-    def query_cords(self, street_name) -> list[Cord]:
-        json_data = self.query_json(street_name)
+    def query_cords(self, street_name, raw=False) -> list[Cord]:
+        json_data = self.query_json(street_name, raw)
 
         points = []
 
@@ -42,5 +46,16 @@ class StreetSearcher:
                 cord = Cord(float(part["lat"]), float(part["lon"]))
 
                 points.append(cord)
+
+        return points
+
+    def query_any(self, street_name, raw=False) -> list[Cord]:
+        json_data = self.query_json(street_name, raw)
+
+        points = []
+
+        for part in json_data:
+            cord = Cord(float(part["lat"]), float(part["lon"]))
+            points.append(cord)
 
         return points
