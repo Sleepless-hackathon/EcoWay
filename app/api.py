@@ -7,7 +7,7 @@ from datetime import datetime, time
 
 api = Blueprint('api', __name__, url_prefix="/api")
 
-air_model = keras.models.load_model("data_prepare/cords_to_score_model")
+air_model = keras.models.load_model("cords_to_score_model")
 
 
 @api.route('/get_cords', methods=['POST'])
