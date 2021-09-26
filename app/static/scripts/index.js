@@ -188,6 +188,8 @@ function fromNameToCoord(id) {
     var data = `${document.getElementById(id).value}`;
     
     xhr.send(data);
+
+    return xhr.responseText
 }
 
 // Функция для подгрузки данных о маршрутах
