@@ -96,6 +96,9 @@ function setPoints() {
 
 // Функция для установки адресов через адреса зданий
 function makePoints() {
+    document.getElementsByClassName("from_input")[0].value = "" 
+    document.getElementsByClassName("to_input")[0].value = "" 
+
     map.dragging.disable();
     map.touchZoom.disable();
     map.doubleClickZoom.disable();
@@ -194,7 +197,7 @@ function fromNameToCoord(id) {
     xhr.send(data);
 
     if(xhr.status == 200) {
-        return xhr.responseText;
+        return JSON.parse(xhr.responseText);
     } 
 }
 
