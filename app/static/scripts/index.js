@@ -198,15 +198,6 @@ function loadWay() {
     fromClasses.add("hidden");
     toClasses.add("hidden");
     blurClasses.remove("hidden");
-    try {
-        var valArr1 = document.getElementById("js-AddressField").value.split(", ");
-        var valArr2 = document.getElementById("js-AddressField2").value.split(", ");
-        var point1 = {"lat" : Number(valArr1[0]), "lng": Number(valArr1[1])};
-        var point2 = {"lat" : Number(valArr2[0]), "lng": Number(valArr2[1])};
-        RoutePath(point1, point2)
-    } catch {
-
-    }
 
     try {
         var valArr1 = document.getElementById("js-AddressField").value;
@@ -215,6 +206,16 @@ function loadWay() {
         var point2 = fromNameToCoord("js-AddressField2");
         console.log(point1)
         console.log(point2)
+        RoutePath(point1, point2)
+    } catch {
+
+    }
+
+    try {
+        var valArr1 = document.getElementById("js-AddressField").value.split(", ");
+        var valArr2 = document.getElementById("js-AddressField2").value.split(", ");
+        var point1 = {"lat" : Number(valArr1[0]), "lng": Number(valArr1[1])};
+        var point2 = {"lat" : Number(valArr2[0]), "lng": Number(valArr2[1])};
         RoutePath(point1, point2)
     } catch {
 
